@@ -10,7 +10,6 @@
 **/
 (function($) {
 	$.fn.placeholder = function() {
-
 		var native_support = ('placeholder' in document.createElement('input'));
 		
 		if(!native_support) {
