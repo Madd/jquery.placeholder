@@ -8,39 +8,32 @@
 		06.04.2011
 		
 **/
-
 (function($) {
 	$.fn.placeholder = function() {
-		var native_support = (function() {
-			var i = document.createElement('input');
-			return 'placeholder' in i;
-		})();
+
+		var native_support = ('placeholder' in document.createElement('input'));
 		
 		if(!native_support) {
 			this.each(function() {
-				$(this).focus(function() {
-					var el = $(this);
-					if(el.data('isEmpty')) {
-						el.val('').removeClass('placeholder');
+				if(!$(this).data('gotPlaceholder')) {
+					$(this).focus(function() {
+						var el = $(this);
+						if(el.data('isEmpty')) {
+							el.val('').removeClass('placeholder');
+						}
+					}).blur(function() {
+						var el = $(this);
+						if(el.data('isEmpty') || !el.val().length) {
+							el.val(el.attr('placeholder')).addClass('placeholder');
+						}
+					}).keyup(function() {
+						var el = $(this);
+						el.data('isEmpty', (el.val().length == 0));
+					}).data('gotPlaceholder', true);
+					
+					if(!$(this).val().length || $(this).val() == $(this).attr('placeholder')) {
+						$(this).val($(this).attr('placeholder')).addClass('placeholder').data('isEmpty', true);
 					}
-				}).blur(function() {
-					var el = $(this);
-					if(el.data('isEmpty') || !el.val().length) {
-						el.val(el.attr('placeholder')).addClass('placeholder');
-					}
-				}).keyup(function() {
-					var el = $(this);
-					if(el.val().length) {
-						el.data('isEmpty', false);
-					} else {
-						el.data('isEmpty', true);
-					}
-				}).change(function() {
-					$(this).keyup();
-				});
-				
-				if(!$(this).val().length) {
-					$(this).val($(this).attr('placeholder')).addClass('placeholder').data('isEmpty', true);
 				}
 			});
 		}

@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery.placeholder.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('[placeholder]').placeholder();
+			});
+		</script>
+		
+		<style type="text/css">
+			.placeholder {
+				color: #999;
+			}
+			
+			input, textarea {
+				padding: 10px;
+				font-size: 1.3em;
+				font-family: helvetica, arial, verdana, sans-serif;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<input type="text" placeholder="Enter title here..." />
+		<br />
+		<br />
+		<textarea placeholder="Enter description here..."></textarea>
+	</body>
+</html>
