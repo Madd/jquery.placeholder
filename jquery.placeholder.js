@@ -9,7 +9,21 @@
 		
 **/
 (function($) {
-	$.fn.placeholder = function() {
+	$.fn.placeholder = function(command) {
+		if(command) {
+			switch(command) {
+				case 'clear':
+					this.each(function() {
+						var el = $(this)
+						if(el.data('isEmpty') || el.val() == el.attr('placeholder')) {
+							el.val('');
+						}
+					});
+				break;
+			}
+			return this;
+		}
+		
 		var native_support = ('placeholder' in document.createElement('input'));
 		
 		if(!native_support) {

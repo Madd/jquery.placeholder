@@ -13,7 +13,7 @@
 				color: #999;
 			}
 			
-			input, textarea {
+			input[type=text], textarea {
 				padding: 10px;
 				font-size: 1.3em;
 				font-family: helvetica, arial, verdana, sans-serif;
@@ -22,9 +22,13 @@
 	</head>
 	
 	<body>
-		<input type="text" placeholder="Enter title here..." />
-		<br />
-		<br />
-		<textarea placeholder="Enter description here..."></textarea>
+		<form action="example.html" method="post" onsubmit="$('[placeholder]').placeholder('clear');">
+			<p><input type="text" placeholder="Enter title here..." /></p>
+			<p><textarea placeholder="Enter description here..."></textarea></p>
+			<br />
+			Old browsers need to clear the placeholder text before sending form data.
+			<p><input type="submit" value="Clear dummy placeholder and send" /></p>
+			<small>Code: <i>$('[placeholder]').placeholder('clear')</i></small>
+		</form>
 	</body>
 </html>
