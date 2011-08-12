@@ -46,6 +46,13 @@
 					if(!$(this).val().length || $(this).val() == $(this).attr('placeholder')) {
 						$(this).val($(this).attr('placeholder')).addClass('placeholder').data('isEmpty', true);
 					}
+
+					if (($(this).is('input') || $(this).is('textarea')) && typeof this.form !== 'undefined') {
+						$(this.form).submit(function(el){return function(){
+							if(el.data('isEmpty') || !el.val().length)
+								el.val('').removeClass('placeholder');
+						}}($(this)))
+					}
 				}
 			});
 		}
